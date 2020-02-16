@@ -36,3 +36,16 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+
+class Hotel(models.Model):
+    """Hotel model"""
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    likes = models.IntegerField(blank=True)
+    dislikes = models.IntegerField(blank=True)
+    users_like = models.ManyToManyField('User')
+
+    def __str__(self):
+        return self.name
